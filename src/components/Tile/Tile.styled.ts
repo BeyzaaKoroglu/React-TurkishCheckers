@@ -11,4 +11,12 @@ export const Styled = styled.div`
   &.white-tile {
     background-color: #b0b0b0;
   }
+
+  &.selected {
+    background-color: red;
+  }
+
+  &.movable {
+    background-color: green;
+  }
 `;

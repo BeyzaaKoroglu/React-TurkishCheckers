@@ -1,3 +1,5 @@
+import { TileType } from "../../redux/game/types";
+
 export type StoneProps = {
-  color: string;
+  tile: TileType;
 };
