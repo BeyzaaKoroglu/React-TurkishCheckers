@@ -3,6 +3,8 @@ export type GameType = {
   selectedStone: string;
   player: "white" | "black";
   movableTiles: Array<MovableTiles>;
+  white: number;
+  black: number;
 };
 
 export type BoardType = Array<TileType>;

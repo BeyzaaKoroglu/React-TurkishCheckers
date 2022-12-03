@@ -1,5 +1,6 @@
 .App {
-  display: grid;
+  display: flex;
+  flex-direction: row;
   place-content: center;
   height: 100vh;
   background-color: #202020;

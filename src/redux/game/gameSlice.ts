@@ -7,6 +7,8 @@ const initialState: GameType = {
   selectedStone: "",
   player: "white",
   movableTiles: [],
+  white: 16,
+  black: 16,
 };
 
 export const gameSlice = createSlice({
@@ -123,6 +125,10 @@ export const gameSlice = createSlice({
             if (tile.id === selectedTile?.delete) {
               tile.isFull = false;
               tile.stoneColor = "";
+
+              state.player === "white"
+                ? (state.black = state.black - 1)
+                : (state.white = state.white - 1);
             }
           }
         }
