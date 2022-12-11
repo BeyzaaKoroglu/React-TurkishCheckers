@@ -9,6 +9,8 @@ const initialState: GameType = {
   movableTiles: [],
   white: 16,
   black: 16,
+  showModal: true,
+  winner: "",
 };
 
 export const gameSlice = createSlice({
@@ -112,6 +114,7 @@ export const gameSlice = createSlice({
       const selectedTile = state.movableTiles.find(
         (tile) => tile.moveTo === action.payload
       );
+      let changePlayer = true;
 
       state.board = state.board.map((tile) => {
         if (tile.id === state.selectedStone) {
@@ -123,12 +126,34 @@ export const gameSlice = createSlice({
             tile.stoneColor = state.player;
           } else {
             if (tile.id === selectedTile?.delete) {
+              changePlayer = false;
               tile.isFull = false;
               tile.stoneColor = "";
 
-              state.player === "white"
-                ? (state.black = state.black - 1)
-                : (state.white = state.white - 1);
+              if (state.player === "white") {
+                if (state.black === 1) {
+                  state.showModal = true;
+                  state.winner = "white";
+                }
+                if (state.black === 2 && state.white === 1) {
+                  state.showModal = true;
+                  state.winner = "nobody";
+                }
+
+                state.black = state.black - 1;
+              } else {
+                if (state.white === 1) {
+                  state.showModal = true;
+                  state.winner = "black";
+                }
+
+                if (state.white === 2 && state.black === 1) {
+                  state.showModal = true;
+                  state.winner = "nobody";
+                }
+
+                state.white = state.white - 1;
+              }
             }
           }
         }
@@ -137,13 +162,28 @@ export const gameSlice = createSlice({
       });
 
       state.selectedStone = "";
-      state.player === "white"
-        ? (state.player = "black")
-        : (state.player = "white");
+      if (changePlayer) {
+        state.player === "white"
+          ? (state.player = "black")
+          : (state.player = "white");
+      }
       state.movableTiles = [];
+    },
+
+    handlePlayAgain: (state) => {
+      state.board = board;
+      state.player = "white";
+      state.white = 16;
+      state.black = 16;
+      state.showModal = false;
+    },
+
+    handleStartGame: (state) => {
+      state.showModal = false;
     },
   },
 });
 
-export const { selectStone, moveStone } = gameSlice.actions;
+export const { selectStone, moveStone, handlePlayAgain, handleStartGame } =
+  gameSlice.actions;
 export default gameSlice.reducer;

@@ -5,6 +5,8 @@ export type GameType = {
   movableTiles: Array<MovableTiles>;
   white: number;
   black: number;
+  showModal: boolean;
+  winner: string;
 };
 
 export type BoardType = Array<TileType>;
