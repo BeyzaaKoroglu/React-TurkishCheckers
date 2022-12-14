@@ -21,92 +21,196 @@ export const gameSlice = createSlice({
       const selectedStone = action.payload;
       state.selectedStone = selectedStone;
       state.movableTiles = [];
+      // console.log(JSON.stringify(state.board.find((tile) => tile.id === selectedStone)));
 
       const vAxis = selectedStone[0];
       const hAxis = selectedStone[1];
       const vIndex = verticalAxis.indexOf(vAxis);
       const hIndex = horizontalAxis.indexOf(hAxis);
 
-      if (state.player === "white") {
-        if (vAxis !== "8") {
-          const frontTile = state.board.find(
-            (tile) => tile.id === verticalAxis[vIndex - 1] + hAxis
-          );
-          const nextTile = state.board.find(
-            (tile) => tile.id === verticalAxis[vIndex - 2] + hAxis
-          );
-          if (frontTile?.isFull) {
-            if (frontTile.stoneColor !== state.player && !nextTile?.isFull)
+      if (state.board.find((tile) => tile.id === selectedStone)?.isDama) {
+        for (let i = vIndex - 1; i > -1; i--) {
+          if (
+            state.board.find((tile) => tile.id === verticalAxis[i] + hAxis)
+              ?.isFull
+          ) {
+            if (
+              state.board.find((tile) => tile.id === verticalAxis[i] + hAxis)
+                ?.stoneColor !== state.player &&
+              !state.board.find(
+                (tile) => tile.id === verticalAxis[i - 1] + hAxis
+              )?.isFull
+            )
+              // DÜZENLEME GEREKEBİLİR
               state.movableTiles.push({
-                moveTo: verticalAxis[vIndex - 2] + hAxis,
-                delete: verticalAxis[vIndex - 1] + hAxis,
+                moveTo: verticalAxis[i - 1] + hAxis,
+                delete: verticalAxis[i] + hAxis,
               });
-          } else
+            break;
+          } else {
             state.movableTiles.push({
-              moveTo: verticalAxis[vIndex - 1] + hAxis,
+              moveTo: verticalAxis[i] + hAxis,
               delete: "",
             });
+          }
+        }
+        for (let i = vIndex + 1; i < 8; i++) {
+          if (
+            state.board.find((tile) => tile.id === verticalAxis[i] + hAxis)
+              ?.isFull
+          ) {
+            if (
+              state.board.find((tile) => tile.id === verticalAxis[i] + hAxis)
+                ?.stoneColor !== state.player &&
+              !state.board.find(
+                (tile) => tile.id === verticalAxis[i + 1] + hAxis
+              )?.isFull
+            )
+              // DÜZENLEME GEREKEBİLİR
+              state.movableTiles.push({
+                moveTo: verticalAxis[i + 1] + hAxis,
+                delete: verticalAxis[i] + hAxis,
+              });
+            break;
+          } else {
+            state.movableTiles.push({
+              moveTo: verticalAxis[i] + hAxis,
+              delete: "",
+            });
+          }
+        }
+        for (let i = hIndex - 1; i > -1; i--) {
+          if (
+            state.board.find((tile) => tile.id === vAxis + horizontalAxis[i])
+              ?.isFull
+          ) {
+            if (
+              state.board.find((tile) => tile.id === vAxis + horizontalAxis[i])
+                ?.stoneColor !== state.player &&
+              !state.board.find(
+                (tile) => tile.id === vAxis + horizontalAxis[i - 1]
+              )?.isFull
+            )
+              // DÜZENLEME GEREKEBİLİR
+              state.movableTiles.push({
+                moveTo: vAxis + horizontalAxis[i - 1],
+                delete: vAxis + horizontalAxis[i],
+              });
+            break;
+          } else {
+            state.movableTiles.push({
+              moveTo: vAxis + horizontalAxis[i],
+              delete: "",
+            });
+          }
+        }
+        for (let i = hIndex + 1; i < 8; i++) {
+          if (
+            state.board.find((tile) => tile.id === vAxis + horizontalAxis[i])
+              ?.isFull
+          ) {
+            if (
+              state.board.find((tile) => tile.id === vAxis + horizontalAxis[i])
+                ?.stoneColor !== state.player &&
+              !state.board.find(
+                (tile) => tile.id === vAxis + horizontalAxis[i + 1]
+              )?.isFull
+            )
+              // DÜZENLEME GEREKEBİLİR
+              state.movableTiles.push({
+                moveTo: vAxis + horizontalAxis[i + 1],
+                delete: vAxis + horizontalAxis[i],
+              });
+            break;
+          } else {
+            state.movableTiles.push({
+              moveTo: vAxis + horizontalAxis[i],
+              delete: "",
+            });
+          }
         }
       } else {
-        if (vAxis !== "1") {
-          const backTile = state.board.find(
-            (tile) => tile.id === verticalAxis[vIndex + 1] + hAxis
+        if (state.player === "white") {
+          if (vAxis !== "8") {
+            const frontTile = state.board.find(
+              (tile) => tile.id === verticalAxis[vIndex - 1] + hAxis
+            );
+            const nextTile = state.board.find(
+              (tile) => tile.id === verticalAxis[vIndex - 2] + hAxis
+            );
+            if (frontTile?.isFull) {
+              if (frontTile.stoneColor !== state.player && !nextTile?.isFull)
+                state.movableTiles.push({
+                  moveTo: verticalAxis[vIndex - 2] + hAxis,
+                  delete: verticalAxis[vIndex - 1] + hAxis,
+                });
+            } else
+              state.movableTiles.push({
+                moveTo: verticalAxis[vIndex - 1] + hAxis,
+                delete: "",
+              });
+          }
+        } else {
+          if (vAxis !== "1") {
+            const backTile = state.board.find(
+              (tile) => tile.id === verticalAxis[vIndex + 1] + hAxis
+            );
+            const nextTile = state.board.find(
+              (tile) => tile.id === verticalAxis[vIndex + 2] + hAxis
+            );
+            if (backTile?.isFull) {
+              if (backTile.stoneColor !== state.player && !nextTile?.isFull)
+                state.movableTiles.push({
+                  moveTo: verticalAxis[vIndex + 2] + hAxis,
+                  delete: verticalAxis[vIndex + 1] + hAxis,
+                });
+            } else
+              state.movableTiles.push({
+                moveTo: verticalAxis[vIndex + 1] + hAxis,
+                delete: "",
+              });
+          }
+        }
+
+        if (hAxis !== "a") {
+          const leftTile = state.board.find(
+            (tile) => tile.id === vAxis + horizontalAxis[hIndex - 1]
           );
           const nextTile = state.board.find(
-            (tile) => tile.id === verticalAxis[vIndex + 2] + hAxis
+            (tile) => tile.id === vAxis + horizontalAxis[hIndex - 2]
           );
-          if (backTile?.isFull) {
-            if (backTile.stoneColor !== state.player && !nextTile?.isFull)
+          if (leftTile?.isFull) {
+            if (leftTile.stoneColor !== state.player && !nextTile?.isFull)
               state.movableTiles.push({
-                moveTo: verticalAxis[vIndex + 2] + hAxis,
-                delete: verticalAxis[vIndex + 1] + hAxis,
+                moveTo: vAxis + horizontalAxis[hIndex - 2],
+                delete: vAxis + horizontalAxis[hIndex - 1],
               });
           } else
             state.movableTiles.push({
-              moveTo: verticalAxis[vIndex + 1] + hAxis,
+              moveTo: vAxis + horizontalAxis[hIndex - 1],
               delete: "",
             });
         }
-      }
 
-      if (hAxis !== "a") {
-        const leftTile = state.board.find(
-          (tile) => tile.id === vAxis + horizontalAxis[hIndex - 1]
-        );
-        const nextTile = state.board.find(
-          (tile) => tile.id === vAxis + horizontalAxis[hIndex - 2]
-        );
-        if (leftTile?.isFull) {
-          if (leftTile.stoneColor !== state.player && !nextTile?.isFull)
+        if (hAxis !== "h") {
+          const rightTile = state.board.find(
+            (tile) => tile.id === vAxis + horizontalAxis[hIndex + 1]
+          );
+          const nextTile = state.board.find(
+            (tile) => tile.id === vAxis + horizontalAxis[hIndex + 2]
+          );
+          if (rightTile?.isFull) {
+            if (rightTile.stoneColor !== state.player && !nextTile?.isFull)
+              state.movableTiles.push({
+                moveTo: vAxis + horizontalAxis[hIndex + 2],
+                delete: vAxis + horizontalAxis[hIndex + 1],
+              });
+          } else
             state.movableTiles.push({
-              moveTo: vAxis + horizontalAxis[hIndex - 2],
-              delete: vAxis + horizontalAxis[hIndex - 1],
+              moveTo: vAxis + horizontalAxis[hIndex + 1],
+              delete: "",
             });
-        } else
-          state.movableTiles.push({
-            moveTo: vAxis + horizontalAxis[hIndex - 1],
-            delete: "",
-          });
-      }
-
-      if (hAxis !== "h") {
-        const rightTile = state.board.find(
-          (tile) => tile.id === vAxis + horizontalAxis[hIndex + 1]
-        );
-        const nextTile = state.board.find(
-          (tile) => tile.id === vAxis + horizontalAxis[hIndex + 2]
-        );
-        if (rightTile?.isFull) {
-          if (rightTile.stoneColor !== state.player && !nextTile?.isFull)
-            state.movableTiles.push({
-              moveTo: vAxis + horizontalAxis[hIndex + 2],
-              delete: vAxis + horizontalAxis[hIndex + 1],
-            });
-        } else
-          state.movableTiles.push({
-            moveTo: vAxis + horizontalAxis[hIndex + 1],
-            delete: "",
-          });
+        }
       }
     },
 
@@ -124,6 +228,16 @@ export const gameSlice = createSlice({
           if (tile.id === selectedTile?.moveTo) {
             tile.isFull = true;
             tile.stoneColor = state.player;
+            if (
+              selectedTile.moveTo.startsWith("8") ||
+              selectedTile.moveTo.startsWith("1")
+            )
+              tile.isDama = true;
+            else {
+              tile.isDama =
+                state.board.find((tile) => tile.id === state.selectedStone)
+                  ?.isDama || false;
+            }
           } else {
             if (tile.id === selectedTile?.delete) {
               changePlayer = false;

@@ -16,6 +16,7 @@ const Stone: FC<StoneProps> = ({ tile }) => {
     <Styled
       onClick={handleClick}
       style={{ backgroundColor: tile.stoneColor }}
+      className={tile.isDama ? "dama" : ""}
     ></Styled>
   );
 };

@@ -16,6 +16,7 @@ export type TileType = {
   className: string;
   isFull: boolean;
   stoneColor: string;
+  isDama: boolean;
 };
 
 export type MovableTiles = {

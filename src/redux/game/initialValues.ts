@@ -19,6 +19,7 @@ verticalAxis.forEach((v, i) => {
               ? "black"
               : ""
           }`,
+          isDama: false,
         })
       : board.push({
           id: `${v}${h}`,
@@ -31,6 +32,7 @@ verticalAxis.forEach((v, i) => {
               ? "black"
               : ""
           }`,
+          isDama: false,
         });
   });
 });
