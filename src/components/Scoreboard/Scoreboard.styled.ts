@@ -7,6 +7,10 @@ export const Styled = styled.div`
   margin-top: 175px;
   text-align: center;
 
+  &.shadow {
+    box-shadow: 0px 0px 20px rgb(255, 100, 100);
+  }
+
   .player {
     font-size: 28px;
     font-weight: bold;

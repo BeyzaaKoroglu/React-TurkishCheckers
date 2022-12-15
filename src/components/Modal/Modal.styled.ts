@@ -16,14 +16,14 @@ export const Styled = styled.div`
     width: 500px;
     min-height: 170px;
     background-color: white;
-    border: 2px solid blue;
+    border: 2px solid #708849;
     text-align: center;
 
     button {
       width: 200px;
       height: 50px;
-      background-color: rgb(0, 127, 255);
-      border: 2px solid blue;
+      background-color: #779556;
+      border: 2px solid #708849;
       border-radius: 25px;
       font-weight: bold;
       font-size: 18px;

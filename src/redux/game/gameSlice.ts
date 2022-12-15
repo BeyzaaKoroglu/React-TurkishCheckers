@@ -21,7 +21,6 @@ export const gameSlice = createSlice({
       const selectedStone = action.payload;
       state.selectedStone = selectedStone;
       state.movableTiles = [];
-      // console.log(JSON.stringify(state.board.find((tile) => tile.id === selectedStone)));
 
       const vAxis = selectedStone[0];
       const hAxis = selectedStone[1];
@@ -41,7 +40,6 @@ export const gameSlice = createSlice({
                 (tile) => tile.id === verticalAxis[i - 1] + hAxis
               )?.isFull
             )
-              // DÜZENLEME GEREKEBİLİR
               state.movableTiles.push({
                 moveTo: verticalAxis[i - 1] + hAxis,
                 delete: verticalAxis[i] + hAxis,
@@ -66,7 +64,6 @@ export const gameSlice = createSlice({
                 (tile) => tile.id === verticalAxis[i + 1] + hAxis
               )?.isFull
             )
-              // DÜZENLEME GEREKEBİLİR
               state.movableTiles.push({
                 moveTo: verticalAxis[i + 1] + hAxis,
                 delete: verticalAxis[i] + hAxis,
@@ -91,7 +88,6 @@ export const gameSlice = createSlice({
                 (tile) => tile.id === vAxis + horizontalAxis[i - 1]
               )?.isFull
             )
-              // DÜZENLEME GEREKEBİLİR
               state.movableTiles.push({
                 moveTo: vAxis + horizontalAxis[i - 1],
                 delete: vAxis + horizontalAxis[i],
@@ -116,7 +112,6 @@ export const gameSlice = createSlice({
                 (tile) => tile.id === vAxis + horizontalAxis[i + 1]
               )?.isFull
             )
-              // DÜZENLEME GEREKEBİLİR
               state.movableTiles.push({
                 moveTo: vAxis + horizontalAxis[i + 1],
                 delete: vAxis + horizontalAxis[i],
