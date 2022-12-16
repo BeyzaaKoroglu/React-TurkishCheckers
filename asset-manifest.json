@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/React-TurkishCheckers/static/css/main.da9f7034.css",
+    "main.js": "/React-TurkishCheckers/static/js/main.e0e5a8cb.js",
+    "static/js/787.71379c10.chunk.js": "/React-TurkishCheckers/static/js/787.71379c10.chunk.js",
+    "index.html": "/React-TurkishCheckers/index.html",
+    "main.da9f7034.css.map": "/React-TurkishCheckers/static/css/main.da9f7034.css.map",
+    "main.e0e5a8cb.js.map": "/React-TurkishCheckers/static/js/main.e0e5a8cb.js.map",
+    "787.71379c10.chunk.js.map": "/React-TurkishCheckers/static/js/787.71379c10.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da9f7034.css",
+    "static/js/main.e0e5a8cb.js"
+  ]
+}
