@@ -20,4 +20,9 @@ export const Styled = styled.div`
   button:hover {
     background-color: #779556;
   }
+
+  @media (max-width: 767px) {
+    position: relative;
+    margin-bottom: 75px;
+  }
 `;

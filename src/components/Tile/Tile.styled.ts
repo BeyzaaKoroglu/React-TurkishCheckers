@@ -20,4 +20,13 @@ export const Styled = styled.div`
   &.movable {
     background-color: green;
   }
+
+  @media (max-width: 912px) {
+    width: 60px;
+    height: 60px;
+  }
+  @media (max-width: 479px) {
+    width: 35px;
+    height: 35px;
+  }
 `;

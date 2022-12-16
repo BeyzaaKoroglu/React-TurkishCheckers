@@ -22,4 +22,51 @@ export const Styled = styled.div`
     font-weight: bold;
     margin-top: 10px;
   }
+
+  @media (max-width: 1279px) {
+    width: 150px;
+    height: 150px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 820px) {
+    width: 120px;
+    height: 120px;
+
+    .player {
+      font-size: 24px;
+    }
+
+    .stone {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    width: 250px;
+    padding-bottom: 100px;
+    margin-top: -30px;
+    margin-bottom: -30px;
+
+    .player {
+      font-size: 40px;
+    }
+
+    .stone {
+      font-size: 60px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    width: 250px;
+    padding-bottom: 10px;
+
+    .player {
+      font-size: 24px;
+    }
+
+    .stone {
+      font-size: 24px;
+    }
+  }
 `;

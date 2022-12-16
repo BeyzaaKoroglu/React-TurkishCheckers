@@ -30,4 +30,10 @@ export const Styled = styled.div`
       margin-bottom: 30px;
     }
   }
+
+  @media (max-width: 500px) {
+    div {
+      width: 90%;
+    }
+  }
 `;
